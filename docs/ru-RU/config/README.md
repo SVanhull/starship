@@ -589,6 +589,7 @@ This module is disabled by default. To enable it, set `disabled` to `false` in y
 | ---------- | ------------- | --------------------------------------------------- |
 | `symbol`   | `"☸ "`        | The symbol used before displaying the Cluster info. |
 | `style`    | `"bold blue"` | The style for the module.                           |
+| `display`  | [link](#kubernetes-context-display) | Display context name and style for the module. |
 | `disabled` | `true`        | Disables the `kubernetes` module                    |
 
 ### Пример
@@ -600,6 +601,41 @@ This module is disabled by default. To enable it, set `disabled` to `false` in y
 symbol = "⛵ "
 style = "dim green"
 disabled = false
+```
+
+### Kubernetes Context Display
+
+The `display` configuration option is used to define custom styles per kubernetes context.
+If no `display` is provided. The default is as shown:
+
+```toml
+[[kubernetes.display]]
+name = prod
+style = "bold red"
+```
+
+#### Options
+
+The `display` option is an array of the following table.
+
+| Variable | Description                                         |
+| -------- | --------------------------------------------------- |
+| `name`   | The exact match of the context name to apply style. |
+| `style`  | The style used if the display option is in use.     |
+
+#### Example
+
+```toml
+[[kubernetes.display]]  # "bold red" style when current-context is prod
+name = "prod"
+style = "bold red"
+
+[[kubernetes.display]]  # "bold yellow" style when current-context is stage
+name = stage
+style = "bold yellow"
+
+# when current-context does not have a match the kubernetes module style will by used
+
 ```
 
 ## Line Break
