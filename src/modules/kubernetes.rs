@@ -65,16 +65,14 @@ pub fn module<'a>(context: &'a Context) -> Option<Module<'a>> {
             };
 
             let display_styles = &config.display;
-            let context_style = display_styles
-                .iter()
-                .find(|style| kube_ctx == style.name);            
+            let context_style = display_styles.iter().find(|style| kube_ctx == style.name);
 
             if let Some(context_style) = context_style {
                 module.set_style(context_style.style);
             } else {
                 module.set_style(config.style);
             }
-            
+
             module.get_prefix().set_value(KUBERNETES_PREFIX);
 
             module.create_segment("symbol", &config.symbol);
